@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lanchonete Delivery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <header class="topbar" role="banner">
+    <div class="logo" aria-label="Lanchonete">🍔 Lanchonete</div>
+
+    <div class="search" role="search">
+      <label class="sr-only" for="searchInput">Buscar produto</label>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar produto..."
+        aria-label="Buscar produto"
+      >
+    </div>
+
+    <button class="audio-button" id="audioButton" type="button" onclick="toggleAudio()" aria-pressed="false" aria-label="Ler o conteúdo da página em voz alta">🔊 Ler página</button>
+
+    <button class="cart-button" onclick="toggleCart()" aria-label="Abrir carrinho de compras">
+      🛒 Carrinho
+      <span id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main class="container" id="conteudo">
+
+    <section class="hero" aria-labelledby="titulo-principal">
+      <div>
+        <span class="hero-tag">DELIVERY</span>
+        <h1 id="titulo-principal">Seu lanche favorito<br>na sua casa 🍔</h1>
+        <p>Escolha seus produtos e monte seu pedido.</p>
+      </div>
+    </section>
+
+    <div class="content">
+
+      <section class="products-area" aria-labelledby="titulo-produtos">
+
+        <h2 id="titulo-produtos" class="sr-only">Produtos da lanchonete</h2>
+        <div class="categories" role="group" aria-label="Categorias de produtos">
+          <button class="category active" onclick="filterProducts('todos', this)">
+            Todos
+          </button>
+
+          <button class="category" onclick="filterProducts('hamburguer', this)">
+            🍔 Hambúrgueres
+          </button>
+
+          <button class="category" onclick="filterProducts('porcao', this)">
+            🍟 Porções
+          </button>
+
+          <button class="category" onclick="filterProducts('bebida', this)">
+            🥤 Bebidas
+          </button>
+        </div>
+
+        <div id="products" class="products-grid" aria-live="polite"></div>
+
+      </section>
+
+      <aside class="cart" id="cart" aria-label="Carrinho de compras">
+
+        <div class="cart-header">
+          <h2>Seu pedido</h2>
+          <button class="close-cart" onclick="toggleCart()" aria-label="Fechar carrinho">×</button>
+        </div>
+
+        <div id="cartItems" class="cart-items" aria-live="polite">
+          <p class="empty-cart">Seu carrinho está vazio.</p>
+        </div>
+
+        <div class="cart-footer">
+
+          <div class="total">
+            <span>Total</span>
+            <strong id="cartTotal">R$ 0,00</strong>
+          </div>
+
+          <button class="checkout-button" onclick="openCheckout()">
+            Finalizar pedido
+          </button>
+
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+  <div class="modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2 id="checkoutTitle">Finalizar pedido</h2>
+        <button type="button" onclick="closeCheckout()" aria-label="Fechar formulário de pedido">×</button>
+      </div>
+
+      <form id="checkoutForm">
+
+        <label>
+          Nome
+          <input type="text" id="customerName" required>
+        </label>
+
+        <label>
+          Telefone
+          <input type="tel" id="customerPhone" required>
+        </label>
+
+        <label>
+          Endereço
+          <input type="text" id="customerAddress" required>
+        </label>
+
+        <label>
+          Número
+          <input type="text" id="customerNumber" required>
+        </label>
+
+        <label>
+          Complemento
+          <input type="text" id="customerComplement">
+        </label>
+
+        <label>
+          Data de entrega
+          <input
+        type="date"
+        id="deliveryDate"
+        required
+        onkeydown="return false;"
+>
+      </label>
+
+      <label>
+       Horário de entrega
+       <input
+    type="time"
+    id="deliveryTime"
+    required
+    onkeydown="return false;"
+  >
+      </label>
+
+        <label>
+          Forma de pagamento
+
+          <select id="payment" required>
+            <option value="">Selecione</option>
+            <option value="Pix">Pix</option>
+            <option value="Cartão">Cartão</option>
+            <option value="Dinheiro">Dinheiro</option>
+          </select>
+        </label>
+
+        <button type="submit" class="checkout-button">
+          Confirmar pedido
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
